@@ -1,0 +1,5 @@
+.env
+sqlite.db
+__pycache__
+__pycache__/handler.cpython-310.pyc
+git-diagnostics-2024-05-03-1142.zip
