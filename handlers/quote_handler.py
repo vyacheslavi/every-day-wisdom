@@ -19,7 +19,7 @@ router = Router()
 async def send_quote(message: types.Message):
     user_id = message.from_user.id
     quote: Quote = crud.get_random_quote(user_id=user_id)
-    text = f"Автор цитаты - {quote.author},\n\n {quote.text}"
+    text = f"Автор цитаты  - <b>{quote.author}</b>,\n\n <i>{quote.text}</i>"
 
     await message.answer(text)
 

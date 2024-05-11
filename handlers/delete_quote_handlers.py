@@ -14,7 +14,7 @@ async def cmd_show_quotes(message: types.Message):
     if quotes:
         for quote in quotes:
             text_of_quote = quote.text[:50] + "..."
-            string = f"{quote.author}: \n {text_of_quote} /del{quote.id}\n\n"
+            string = f"<b>{quote.author}</b>: \n <i>{text_of_quote}</i> /del{quote.id}\n\n"
             list_of_quotes.append(string)
     else:
         await message.answer("У вас нет цитат")

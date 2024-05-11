@@ -4,13 +4,13 @@ from typing import Any, Awaitable, Callable, Coroutine, Dict
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject, Message
 
-from config import config
+from config import settings
 
 
 class AuthMiddleware(BaseMiddleware):
 
     def __init__(self) -> None:
-        self.access_id = config.admin_id
+        self.access_id = settings.admin_id
         super().__init__()
 
     async def __call__(
