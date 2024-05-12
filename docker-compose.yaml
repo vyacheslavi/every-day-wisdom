@@ -1,0 +1,29 @@
+version: '3.4'
+services:
+
+  bot:
+    build:
+      context: .
+      dockerfile: docker/bot/Dockerfile
+
+    restart: always
+
+    env_file:
+      - .env
+
+    ports:
+      - "8000:8000"
+
+    command: [ "python", "main.py" ]
+
+    depends_on:
+      - redis
+
+  redis:
+    container_name: redis
+    build:
+      context: .
+      dockerfile: docker/redis/Dockerfile
+
+    ports:
+      - "6379:6379"
