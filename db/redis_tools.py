@@ -1,4 +1,4 @@
 from aioredis import Redis
 
 
-redis = Redis()
+redis = Redis(host="redis", )
