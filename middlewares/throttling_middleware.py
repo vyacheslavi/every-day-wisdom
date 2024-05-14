@@ -23,7 +23,7 @@ class ThrottlingMiddleware(BaseMiddleware):
         result = await redis.get(user)
 
         if result:
-            return await event.message.answer("Не больше 1 запроса в 5 секунд")
+            return await event.message.answer("Не больше 1 запроса в 2 секунд")
         else:
             await redis.set(name=user, value=1, ex=5)
             return await handler(event, data)
