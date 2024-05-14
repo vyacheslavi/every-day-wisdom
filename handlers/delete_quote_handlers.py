@@ -10,16 +10,18 @@ router = Router()
 async def cmd_show_quotes(message: types.Message):
     user_id = message.from_user.id
     quotes = crud.get_all_quotes(user_id=user_id)
-    if quotes:
-        list_of_quotes = []
-        for quote in quotes:
-            text_of_quote = quote.text[:50] + "..."
-            string = (
-                f"<b>{quote.author}</b>: \n <i>{text_of_quote}</i> /del{quote.id}\n\n"
-            )
-            list_of_quotes.append(string)
-            text = " ".join(list_of_quotes)
-            await message.answer(text)
+
+    list_of_quotes = []
+    text = ""
+
+    for quote in quotes:
+        text_of_quote = quote.text[:50] + "..."
+        string = f"<b>{quote.author}</b>: \n <i>{text_of_quote}</i> /del{quote.id}\n\n"
+        list_of_quotes.append(string)
+        text = " ".join(list_of_quotes)
+
+    if text:
+        await message.answer(text)
     else:
         await message.answer("У вас нет цитат")
 
