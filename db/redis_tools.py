@@ -1,4 +1,5 @@
 from aioredis import Redis
 
+from config import settings
 
-redis = Redis(host="redis", )
+redis = Redis.from_url(url=settings.redis_url)
