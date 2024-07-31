@@ -3,6 +3,12 @@ from aiogram.filters import Command
 
 from db.crud import crud
 
+
+DELETED = "Удалено"
+QUOTES_NOT_EXIST = "У вас нет цитат"
+INVALID_COMMAND = "У вас нет цитат"
+
+
 router = Router()
 
 
@@ -23,7 +29,7 @@ async def cmd_show_quotes(message: types.Message):
     if text:
         await message.answer(text)
     else:
-        await message.answer("У вас нет цитат")
+        await message.answer(QUOTES_NOT_EXIST)
 
 
 @router.message(F.text.startswith("/del"))
@@ -35,6 +41,6 @@ async def cmd_delete_quote(message: types.Message):
         user_id=user_id,
     ):
         crud.delete_quote(quote_id=quote_id)
-        await message.answer("Удалено")
+        await message.answer(DELETED)
     else:
-        await message.answer("Некорректная команда")
+        await message.answer(INVALID_COMMAND)

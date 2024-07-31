@@ -2,8 +2,12 @@ from typing import Any, Awaitable, Callable, Dict
 
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject
+from aiogram.dispatcher.flags import get_flag
 
 from db.redis_tools import redis
+from config import settings
+
+WARNING_MSG = "Допустимо 1 сообщение в 1 секунду"
 
 
 class ThrottlingMiddleware(BaseMiddleware):
@@ -23,7 +27,7 @@ class ThrottlingMiddleware(BaseMiddleware):
         result = await redis.get(user)
 
         if result:
-            return await event.message.answer("Не больше 1 запроса в 2 секунд")
+            return await event.message.answer(WARNING_MSG)
         else:
-            await redis.set(name=user, value=1, ex=5)
+            await redis.set(name=user, value=1, ex=settings.anti_spam_seconds)
             return await handler(event, data)
