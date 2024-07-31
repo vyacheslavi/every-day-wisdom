@@ -14,7 +14,6 @@ from handlers import (
     delete_quote_router,
 )
 from middlewares import (
-    AuthMiddleware,
     ApschedulerMiddleware,
     ThrottlingMiddleware,
 )
@@ -28,7 +27,6 @@ async def main():
     dp = Dispatcher()
     scheduler = AsyncIOScheduler(timezone="Europe/Moscow")
 
-    dp.update.outer_middleware(AuthMiddleware())
     dp.update.middleware(ApschedulerMiddleware(scheduler=scheduler))
     dp.update.middleware(ThrottlingMiddleware())
 
