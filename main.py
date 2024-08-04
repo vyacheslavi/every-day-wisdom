@@ -17,9 +17,11 @@ from middlewares import (
     ApschedulerMiddleware,
     ThrottlingMiddleware,
 )
+from db.database import create_db
 
 
 async def main():
+    create_db()
     bot = Bot(
         token=settings.bot_token.get_secret_value(),
         default=DefaultBotProperties(parse_mode=ParseMode.HTML),
